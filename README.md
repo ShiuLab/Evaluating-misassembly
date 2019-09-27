@@ -1,7 +1,7 @@
 # Evaluating-misassembly
 Factors influencing and machine learning models predicting read coverage in a genome assembled using short reads
 
-> Step 01: Map genome sequencing reads to tomato genome.
+> ## Step 01: Map genome sequencing reads to tomato genome.##
 
 > Step 02: Determine the optimal bin size.
 
