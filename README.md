@@ -34,7 +34,7 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
 > ## Step 11: Get importance value of each feature in the prediction models
   
- python 11_tree-based_FS.py your_dataset your_classes_list
+ - python 11_tree-based_FS.py your_dataset your_classes_list
 
 > ## Step 12: Select K-mer and SSR features based on p-value of Kruskal-Wallis H test
  python 12_KS_test.py path_to_your_files output_name
