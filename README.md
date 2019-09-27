@@ -30,10 +30,12 @@ To evaluate the accuracy and precision of HC/LC/BG calling, resample reads from 
 To assess the extent to which read coverage impacts the RD determination, reads at 5-fold, 10-fold, 20-fold and 30-fold coverages were resampled from dataset2, and were used to rerun CNVnator.
 
 > ## Step 09: Get the features to build the machine learning models
+** GC content **
 
-> ## Step 10: Build 3-class prediction models using Random Forest
 
-- python ML_classification.py -df your_dataset -alg RF -cm T -plots T -gs T -n 100 -cv 10 -p 8 -apply all -threshold_test accuracy -cl_train HC,Background  ### ML_classification.py see https://github.com/ShiuLab/ML-Pipeline, contributed by Christina Azodi
+> ## Step 10: Build prediction models using Random Forest
+
+- python ML_classification.py -df your_dataset -alg RF -cm T -plots T -gs T -n 100 -cv 10 -p 8 -apply all -threshold_test accuracy -cl_train your_classes  ### ML_classification.py see https://github.com/ShiuLab/ML-Pipeline, contributed by Christina Azodi
 
 > ## Step 11: Get importance value of each feature in the prediction models
   
@@ -47,13 +49,18 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
  - python 13_density_across_genome.py  ### input files see notes in the script
  
-> ## Step 14: Determine the correlation of prevalence of HC/LC/BG and genome features
+> ## Step 14: Estimate the prevalence of HC/LC/BG across the genome
 
 To assess how the observed correlation between densities of HC/LC/BG regions with densities of genome features derived from random expectation, HC/LC/BG regions were reshuffled across the genome 1000 times, where HC/LC/BG regions don't overlap with each other.
+
+ - python 14_01_reshuffle_HC_LC_BG.py path_to_save HC_regions LC_regions Length_of_chromosomes 
+ - python 14_02_density_of_reshuffled_HC_LC_BG_in_500Kb.py Length_of_chromosomes correlation_NCBI_SGN path_to_files 
 
 > ## Step 15: Estimate gene proproties located in HC regions
 
 To evaluate the properties of genes located in HC regions, first the number of each type of gene overlapping with HC regions were determined. Next, regions with same number and length of HC regions were randomly selected from BG regions, which was repeat 10,000 times. The observed numbers of genes were compared with the random null distribution to see which type of gene is over- or under-representative.
+
+
 
 > ## Step 16: Gene set enrichment analysis (Fisher’s exact test)
  
