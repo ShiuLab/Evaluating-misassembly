@@ -35,7 +35,7 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
 > ## Step 11: Get importance value of each feature in the prediction models
   
-  python 11_tree-based_FS.py your_dataset your_classes_list
+-- python 11_tree-based_FS.py your_dataset your_classes_list
        
 > ## Step 12: Determine the correlation between densities of HC/LC/BG regions with densities of genome features.
 
