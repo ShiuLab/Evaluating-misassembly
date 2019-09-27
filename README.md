@@ -7,7 +7,7 @@ Factors influencing and machine learning models predicting read coverage in a ge
 
 # Step 03: Determine the read depth (RD) in each bin region.
 
-# Step 04: Determine regions with significantly higher (HC) or lower (LC) read coverages than genome wide average (background, BG).                    In outputs of CNVnator, HC is duplication, LC is deletion. The remain regions were taken as BG.
+# Step 04: Determine regions with significantly higher (HC) or lower (LC) read coverages than genome wide average (background, BG).                    Note that in outputs of CNVnator, HC is referred to as "duplication", while LC is "deletion". The remain regions were taken as BG.
           
 # Step 05: Adjust p-values (q-value), then filter HC/LC regions based on q-value and q0 value. Before that q-value threshold was determined            by evaluating the consistency between results using original reads and resampled reads. Reads were resampled based on simulated            RDs: i) the only possible RD values were 0 (LC), 1 (BG), or 2 (HC) regions; ii) the analysisoriginal RD values were discretized            (rounded) to their closest integers; iii) the analysis RD were used.
 
