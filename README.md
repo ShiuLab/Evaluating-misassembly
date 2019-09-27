@@ -35,23 +35,26 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
 > ## Step 11: Get importance value of each feature in the prediction models
   
--- python 11_tree-based_FS.py your_dataset your_classes_list
-       
-> ## Step 12: Determine the correlation between densities of HC/LC/BG regions with densities of genome features.
+ python 11_tree-based_FS.py your_dataset your_classes_list
 
-> ## Step 13: Determine the correlation of prevalence of HC/LC/BG and genome features
+> ## Step 12: Select K-mer and SSR features based on p-value of Kruskal-Wallis H test
+ python 12_KS_test.py path_to_your_files output_name
+       
+> ## Step 13: Determine the correlation between densities of HC/LC/BG regions with densities of genome features.
+
+> ## Step 14: Determine the correlation of prevalence of HC/LC/BG and genome features
 
 To assess how the observed correlation between densities of HC/LC/BG regions with densities of genome features derived from random expectation, HC/LC/BG regions were reshuffled across the genome 1000 times, where HC/LC/BG regions don't overlap with each other.
 
-> ## Step 14: Estimate gene proproties located in HC regions
+> ## Step 15: Estimate gene proproties located in HC regions
 
 To evaluate the properties of genes located in HC regions, first the number of each type of gene overlapping with HC regions were determined. Next, regions with same number and length of HC regions were randomly selected from BG regions, which was repeat 10,000 times. The observed numbers of genes were compared with the random null distribution to see which type of gene is over- or under-representative.
 
-> ## Step 15: Gene set enrichment analysis
-
-Fisher’s exact test and Likelihood Ratio test
-
-> ## Step 16: Validation of HC regions
+> ## Step 16: Gene set enrichment analysis (Fisher’s exact test)
+ 
+ python 13_01_Test_Fisher.py your_file 0/1  ## contributed by Sahra Uygun
+  
+> ## Step 17: Validation of HC regions
 
 To validate the HC regions detected in our study, one regions assembled using PCR sequneces was compared to the corresponding region assembled using short reads
 
