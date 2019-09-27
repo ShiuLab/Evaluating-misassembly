@@ -33,15 +33,20 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
 > ## Step 10: Build 3-class prediction models using Random Forest
 
+- python ML_classification.py -df your_dataset -alg RF -cm T -plots T -gs T -n 100 -cv 10 -p 8 -apply all -threshold_test accuracy -cl_train HC,Background  ### ML_classification.py see https://github.com/ShiuLab/ML-Pipeline, contributed by Christina Azodi
+
 > ## Step 11: Get importance value of each feature in the prediction models
   
  - python 11_tree-based_FS.py your_dataset your_classes_list
 
 > ## Step 12: Select K-mer and SSR features based on p-value of Kruskal-Wallis H test
-  - python 12_KS_test.py path_to_your_files output_name
+
+- python 12_KS_test.py path_to_your_files output_name
        
 > ## Step 13: Determine the correlation between densities of HC/LC/BG regions with densities of genome features.
 
+ - python 13_density_across_genome.py  ### input files see notes in the script
+ 
 > ## Step 14: Determine the correlation of prevalence of HC/LC/BG and genome features
 
 To assess how the observed correlation between densities of HC/LC/BG regions with densities of genome features derived from random expectation, HC/LC/BG regions were reshuffled across the genome 1000 times, where HC/LC/BG regions don't overlap with each other.
