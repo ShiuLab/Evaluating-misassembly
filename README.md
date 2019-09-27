@@ -21,7 +21,8 @@ Factors influencing and machine learning models predicting read coverage in a ge
 
 > Step 10: Build 3-class prediction models using Random Forest
 
-> Step 11: Get the importance value of each feature in the 3-class prediction models
+> Step 11: Get the importance value of each feature in the prediction models
+  python 11_tree-based_FS.py your_dataset your_classes_list
        
 > Step 12: Determine the correlation between densities of HC/LC/BG regions with densities of genome features.
 
