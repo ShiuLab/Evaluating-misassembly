@@ -17,9 +17,10 @@ Adjust p-values (q-value), then filter HC/LC regions based on q-value and q0 val
 
 > ## Step 06: Determine HC/LC/BG regions with high confidence
 
-'''Compare RD in HC, LC, and BG regions, then determine the threshold to call HC/LC/BG regions with high confidence.
+Compare RD in HC, LC, and BG regions, then determine the threshold to call HC/LC/BG regions with high confidence.
 
  - R --vanilla --slave --args RD_from_CNVnator HC_LC_designation_from_CNVnator HC_LC_designation_from_CNVnator_after_filtering output_HC output_BG output_LC < 06_threshold_to_distinguishing_HC_LC_BG_regions.r
+ 
 > ## Step 07: Accuracy and precision of HC/LC/BG calling
 
 To evaluate the accuracy and precision of HC/LC/BG calling, resample reads from genome with simulated RDs, and rerun CNVnator again and compare the original RDs (anslysis RDs) with the new RD. The simulated RDs are: i) the only possible RD values were 0 (LC), 1 (BG), or 2 (HC) regions; ii) the analysisoriginal RD values were discretized (rounded) to their closest integers; iii) the analysis RD were used.
@@ -51,7 +52,7 @@ To evaluate the properties of genes located in HC regions, first the number of e
 
 > ## Step 16: Gene set enrichment analysis (Fisher’s exact test)
  
-  - python 16_Test_Fisher.py your_file 0/1  ## contributed by Sahra Uygun
+  - python 16_Test_Fisher.py your_file 0/1    ## contributed by Sahra Uygun
  
 
 
