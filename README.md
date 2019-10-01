@@ -19,17 +19,31 @@ samtools view -bS 02_SRR404081_reorder.sam -o 03_SRR404081_reorder.bam
 
 java -jar $PICARD/SortSam.jar INPUT=03_SRR404081_reorder.bam OUTPUT=04_SRR404081_sorted.bam SORT_ORDER=coordinate
 
-> ## Step 02: Determine the optimal bin size.
+> ## Step 02: Determine the optimal bin size. Note that bin sizes of 50, 100, 150, 200, 250, 300 bp have been tested
 
-> ## Step 03: Determine the read depth (RD) in each bin region.
+> Determine read depth and regions with variable read coverage using CNVnator with different bin sizes. Note that in outputs of CNVnator, regions with significantly higher (HC) is referred to as "duplication", while regions with significanly lower (LC) read coverages is "deletion". The remain regions were taken as BG.
 
-> ## Step 04: HC/LC designation
+cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -tree 04_SRR404081_sorted.bam -unique
+cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -his bin_size -d genome/
+cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -stat bin_size
+cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -partition bin_size
+cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -call bin_size > Sly.cnv
 
-Determine regions with significantly higher (HC) or lower (LC) read coverages than genome wide average (background, BG). Note that in outputs of CNVnator, HC is referred to as "duplication", while LC is "deletion". The remain regions were taken as BG.
-          
-> ## Step 05: HC/LC designation filtering
+> Determine the optimal bin size. The optimal bin size was the bin size leading to a ratio of RD average to RD standard deviation of ~4-5 as suggested (Abyzov et al., 2011)
+
+cnvnator -root my.root -his bin_size -d genome/
+
+cnvnator -root my.root -eval bin_size > out_put
+
+> ## Step 03: save the read depth (RD) in each bin region to a file
+
+awk '{print $2}END{print "exit"}' Sly.cnv | cnvnator -root Sly.root -genotype bin_size > out_put
+
+> ## Step 04: HC/LC designation filtering
 
 Adjust p-values (q-value), then filter HC/LC regions based on q-value and q0 value. Before that, q-value threshold was determined by evaluating the consistency between results using original reads and resampled reads. Reads were resampled based on simulated RDs: i) the only possible RD values were 0 (LC), 1 (BG), or 2 (HC) regions; ii) the analysisoriginal RD values were discretized (rounded) to their closest integers; iii) the analysis RD were used.
+
+
 
 > ## Step 06: Determine HC/LC/BG regions with high confidence
 
