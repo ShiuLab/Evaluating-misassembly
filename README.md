@@ -4,15 +4,19 @@ Factors influencing and machine learning models predicting read coverage in a ge
 > ## Step 01: Map genome sequencing reads to tomato genome.
 
 > mapping reads to tomato genome
+
 bwa mem -R "@RG\tID:1\tSM:SRR404081\tLB:SRR404081\tPL:SRR404081\tPU:SRR404081" -t 8 Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa  Sly.1.trimmed.fastq Sly.2.trimmed.fastq > 01_SRR404081.sam
 
 > reorder the mapped reads
+
 java -jar $PICARD/ReorderSam.jar I=01_SRR404081.sam O=02_SRR404081_reorder.sam REFERENCE=Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa
 
 > transfer sam file to bam file
+
 samtools view -bS 02_SRR404081_reorder.sam -o 03_SRR404081_reorder.bam
 
 > sort the bam file by coordinate
+
 java -jar $PICARD/SortSam.jar INPUT=03_SRR404081_reorder.bam OUTPUT=04_SRR404081_sorted.bam SORT_ORDER=coordinate
 
 > ## Step 02: Determine the optimal bin size.
