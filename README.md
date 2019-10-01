@@ -24,9 +24,13 @@ java -jar $PICARD/SortSam.jar INPUT=03_SRR404081_reorder.bam OUTPUT=04_SRR404081
 > Determine read depth and regions with variable read coverage using CNVnator with different bin sizes. Note that in outputs of CNVnator, regions with significantly higher (HC) is referred to as "duplication", while regions with significanly lower (LC) read coverages is "deletion". The remain regions were taken as BG.
 
 cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -tree 04_SRR404081_sorted.bam -unique
+
 cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -his bin_size -d genome/
+
 cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -stat bin_size
+
 cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -partition bin_size
+
 cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -call bin_size > Sly.cnv
 
 > Determine the optimal bin size. The optimal bin size was the bin size leading to a ratio of RD average to RD standard deviation of ~4-5 as suggested (Abyzov et al., 2011)
@@ -83,7 +87,8 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
 To assess how the observed correlation between densities of HC/LC/BG regions with densities of genome features derived from random expectation, HC/LC/BG regions were reshuffled across the genome 1000 times, where HC/LC/BG regions don't overlap with each other.
 
- - python 14_01_reshuffle_HC_LC_BG.py path_to_save HC_regions LC_regions Length_of_chromosomes 
+ - python 14_01_reshuffle_HC_LC_BG.py path_to_save HC_regions LC_regions Length_of_chromosomes
+ 
  - python 14_02_density_of_reshuffled_HC_LC_BG_in_500Kb.py Length_of_chromosomes correlation_NCBI_SGN path_to_files 
 
 > ## Step 15: Estimate gene proproties located in HC regions
